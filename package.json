@@ -19,14 +19,15 @@
     "url": "https://github.com/guilhermesilveira/paper-storage/issues"
   },
   "files": [
+    "bin",
     "dist",
     "README.md",
     "LICENSE"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "paper-storage": "./dist/bin/paper-storage.js"
+  "directories": {
+    "bin": "bin"
   },
   "engines": {
     "node": ">=20"
