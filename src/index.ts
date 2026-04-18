@@ -1,4 +1,4 @@
-export { listPapers, movePaper, retrievePaper, storePaper, dominantExtractionMethod, type ListPapersDeps, type ListPapersEntry, type MovePaperDeps, type MovePaperResult, type PaperMetadata, type RetrievePaperDeps, type RetrievePaperResult, type StorePaperDeps, type StorePaperResult } from './lib/paperStorage';
+export { listPapers, movePaper, retrievePaper, storePaper, dominantExtractionMethod, standardizePaperName, type ListPapersDeps, type ListPapersEntry, type MovePaperDeps, type MovePaperResult, type PaperMetadata, type RetrievePaperDeps, type RetrievePaperResult, type StorePaperDeps, type StorePaperResult } from './lib/paperStorage';
 export { getFlag, getPaperStorageUsage, hasFlag, isPaperStorageCommand, PAPER_STORAGE_COMMANDS, type PaperStorageCommand } from './lib/paperStorageCli';
 export { computeTextScore, extractPdfText, extractWithMarker, type ExtractSpawnFn, type ExtractionResult, type MarkerExtractDeps, type PageExtractionResult } from './lib/paperStorageExtract';
 export { checkRequiredTools, initPaperStorageRepo, type CheckSpawnFn, type InitRepoResult, type InitSpawnFn, type ToolCheckItem, type ToolCheckResult } from './lib/paperStorageInit';

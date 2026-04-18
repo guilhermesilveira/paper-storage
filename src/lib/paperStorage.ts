@@ -69,6 +69,20 @@ export interface StorePaperDeps {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 /**
+ * Convert a human paper label into the storage-friendly slug used by byName.
+ */
+export function standardizePaperName(value: string): string {
+  return String(value || '')
+    .normalize('NFKD')
+    .replaceAll(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replaceAll('&', ' and ')
+    .replaceAll(/[^a-z0-9]+/g, '-')
+    .replaceAll(/-+/g, '-')
+    .replaceAll(/^-|-$/g, '');
+}
+
+/**
  * Determine the single best label for extractionMethod from a full result.
  * Uses the method that won on the most pages. Falls back to 'failed' / 'unsupported-format'.
  */

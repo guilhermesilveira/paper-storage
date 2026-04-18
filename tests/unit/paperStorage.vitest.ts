@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { join } from 'node:path';
-import { storePaper, dominantExtractionMethod, retrievePaper, movePaper, listPapers, type StorePaperDeps, type RetrievePaperDeps, type MovePaperDeps } from '../../src/lib/paperStorage';
+import { storePaper, dominantExtractionMethod, standardizePaperName, retrievePaper, movePaper, listPapers, type StorePaperDeps, type RetrievePaperDeps, type MovePaperDeps } from '../../src/lib/paperStorage';
 import { addEntry, removeEntry, updateEntry, EMPTY_INDEX, type PaperIndex, type PaperIndexEntry } from '../../src/lib/paperStorageRepo';
 import type { ExtractionResult } from '../../src/lib/paperStorageExtract';
 import type { SplitResult } from '../../src/lib/paperStorageSplit';
@@ -92,6 +92,23 @@ describe('dominantExtractionMethod', () => {
   it('returns unknown when ok=true but no pages', () => {
     const result = dominantExtractionMethod({ ok: true, pageCount: 0, availableMethods: [], pages: [], overallScore: 0, lowQualityPages: [] });
     expect(result === 'unknown').toBe(true);
+  });
+});
+
+describe('standardizePaperName', () => {
+  it('lowercases and hyphenates a human title', () => {
+    expect(standardizePaperName('Olech 1964 — Global phase-portrait of a plane autonomous system'))
+      .toBe('olech-1964-global-phase-portrait-of-a-plane-autonomous-system');
+  });
+
+  it('removes accents and normalizes punctuation', () => {
+    expect(standardizePaperName('Guíñez, Castañeda & Mañosas (2011)'))
+      .toBe('guinez-castaneda-and-manosas-2011');
+  });
+
+  it('collapses repeated separators and trims edges', () => {
+    expect(standardizePaperName('  arXiv:1201.4818v2 / preprint  '))
+      .toBe('arxiv-1201-4818v2-preprint');
   });
 });
 
